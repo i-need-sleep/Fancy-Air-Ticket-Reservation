@@ -1,0 +1,35 @@
+{% extends 'base.html'%}
+{% block head %}
+    <title> View Customers </title>
+{% endblock%}
+{% block body %}
+    <h1> Customers </h1>
+
+    <button onclick = "window.location.href='../staff_home';">Back</button> 
+
+    <!-- Show customer information -->
+    {% if data %}
+    <table>
+        <tr>
+            <th>Email</th>
+            <th>Names</th>
+            <th>#Flights</th>
+            <th>Flight Details</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            {% for key, value in row.items() %}
+                <th> {{ value }} </th>
+            {% endfor %}
+            <td class="container">
+                <form action="/staff_customers_details" method="POST" class="center">
+                <button type="submit" name="data" value="{{row}}">Details</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table> 
+    {% else %}
+        <p> Nothing to show here.. </p>  
+    {% endif %}
+{% endblock%}

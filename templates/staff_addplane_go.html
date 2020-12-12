@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{% block head %}
+    <title> My Planes </title>
+{% endblock%}
+{% block body %}
+    <h1> New Plane Added </h1>
+
+    <button onclick = "window.location.href='../staff_home';">Staff Home</button> 
+    <button onclick = "window.location.href='../staff_addplane';">Add More Planes</button> 
+
+    {% if data %}
+    <table>
+        <tr>
+            <th>Airline</th>
+            <th>Plane ID</th>
+            <th>Seats</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            {% for key, value in row.items() %}
+                <th> {{ value }} </th>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table> 
+    {% else %}
+        <p> Nothing to show here.. </p>  
+    {% endif %}
+{% endblock%}

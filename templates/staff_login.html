@@ -1,0 +1,77 @@
+{% extends 'prettybase.html'%}
+{% block head %}
+<title> Staff Login </title>
+{% endblock%}
+{% block body %}
+{% if email_taken %}
+
+<body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-signin my-5">
+            <div class="card-body">
+              <h5 class="card-title text-center">Airline Staff Sign In</h5>
+              <form class="form-signin"  action="/staff_login_go" method="POST">
+                <p> Resitration successful. Please log in through the form below.</p>
+                <div class="form-label-group">
+                  <input type="text" name="username" class="form-control" placeholder="Username" value={{email_taken}} required autofocus>
+                  <label for="email">Email</label>
+                </div>
+  
+                <div class="form-label-group">
+                  <input type="password" name="password" class="form-control" placeholder="Password" required>
+                  <label for="password">Password</label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+              </form>
+            <p style="margin: 8px;"></p>
+            <div class="form-signin">
+              <button class="btn btn-lg btn-back btn-block text-uppercase" onclick = "window.location.href='../';">Home Page</button> 
+            </div><hr class="my-4">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% else %}
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-signin my-5">
+            <div class="card-body">
+              <h5 class="card-title text-center">Airline Staff Sign In</h5>
+              <form class="form-signin"  action="/staff_login_go" method="POST">
+                <div class="form-label-group">
+                  <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+                  <label for="email">Email</label>
+                </div>
+  
+                <div class="form-label-group">
+                  <input type="password" name="password" class="form-control" placeholder="Password" required>
+                  <label for="password">Password</label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+              </form>
+              <p style="margin: 8px;"></p>
+              <div class="form-signin">
+                <button class="btn btn-lg btn-back btn-block text-uppercase" onclick = "window.location.href='../';">Home Page</button> 
+              </div><hr class="my-4">
+                {% if login_fail %}
+                <p class="warning"> Wrong email/password combination. Please try again. <br>
+                    If you fail to remember the correct combination, immediately report to your supervior for a 
+                    <span style="font-weight: bold;">courteous*</span> session of education and reevaluation.<br>
+                    <span style="font-style: italic; font-size: small;">*<span style="font-weight: bold;">courtesy</span> not guaranteed.</p>
+                {% endif %}
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+{% endif %}
+
+{% endblock%}

@@ -1,0 +1,37 @@
+{% extends 'base.html'%}
+{% block head %}
+<title> Booking Agent Registration </title>
+{% endblock%}
+{% block body %}
+<h1> Register as a Booking Agent </h1>
+
+<button onclick = "window.location.href='../';">Home Page</button> 
+
+<!-- Warning if email is already taken -->
+{% if email_taken %}
+<p class="warning"> {{email_taken}} is already taken. Please use a different address.<p>
+
+<!-- Registration Form with values filled with input from the last submission -->
+<div class="signup">
+    <form action="/agent_signup_go" method="POST">
+    <label for="email">Email:</label>
+    <input type="text" name="email" value={{saved_val[0]}} required><br>
+    <label for="password">Password:</label>
+    <input type="password" name="password" minlength="8" value={{saved_val[1]}} required>
+    <button type="submit">Submit</button>
+    </form>
+</div>
+{% else %}
+<!-- Registration Form -->
+<div class="signup">
+    <form action="/agent_signup_go" method="POST">
+    <label for="email">Email:</label>
+    <input type="text" name="email" required><br>
+    <label for="password">Password:</label>
+    <input type="password" name="password" minlength="8" required><br>
+    <button type="submit">Submit</button>
+    </form>
+</div>
+{% endif %}
+
+{% endblock%}

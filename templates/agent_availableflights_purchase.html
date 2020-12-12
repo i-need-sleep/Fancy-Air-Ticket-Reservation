@@ -1,0 +1,56 @@
+{% extends 'base.html'%}
+{% block head %}
+    <title> Purchase Details </title>
+{% endblock%}
+{% block body %}
+    <h1> Purchase Details </h1>
+
+    <button onclick = "window.location.href='/agent_availableflights';">Back</button> 
+
+    {% if error %}
+    <p class=warning> There is an error proccessing your order. <br>
+        Please check the information and try again.
+    </p>
+    {% endif %}
+
+    {% if data %}
+    <table style="width:100%">
+        <tr>
+            <th>Airline</th>
+            <th>Fight Number</th>
+            <th>Departure Airport</th>
+            <th>Departure Time</th>
+            <th>Arrival Airport</th>
+            <th>Arrival Time</th>
+            <th>Price</th>
+            <th>Total Seats</th>
+            <th>Available Seats</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            {% for key, value in row.items() %}
+                <th> {{ value }} </th>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table> 
+    {% else %}
+        <p class=warning> Something is wrong.. </p>  
+    {% endif %}
+
+    <h2> Additional Information </h2>
+    <div>
+        <form action="/agent_availableflights_purchase_go" method="POST">
+            Quantity: 
+            <input type="number" id="quantity" name="quantity" value = 1 min="1" max={{data[0]["available_seats"]}} required> <br>
+            Customer email: 
+            <input type="text" name="customer_email" required> <br>
+            I agree to the <span style="font-style: italic;"> Service Agreement </span> 
+            that has not yet been and most likely will never be implemented <br
+            >since I wasn't going to read it anyways.
+            <input type="checkbox" required> <br>
+            <input type="hidden" name="data" value="{{data[0]}}">
+        <button type="submit">Earn My Commission</button>
+        </form>
+    </div>
+{% endblock%}
